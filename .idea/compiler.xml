@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Annotation profile for User_Service_M1" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.46/lombok-1.18.46.jar" />
+        </processorPath>
+        <module name="Review_Service_M7" />
+        <module name="Inventory_Service_M6" />
+        <module name="User_Service_M1" />
+        <module name="Order_Service_M4" />
+        <module name="Payment_Service_M5" />
+        <module name="Notification_Service_M8" />
+        <module name="Category_Service_M9" />
+        <module name="Cart_Service_M3" />
+        <module name="Auth_Service_M10" />
+      </profile>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Product_Service_M2" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Auth_Service_M10" options="-parameters" />
+      <module name="Cart_Service_M3" options="-parameters" />
+      <module name="Category_Service_M9" options="-parameters" />
+      <module name="Inventory_Service_M6" options="-parameters" />
+      <module name="Notification_Service_M8" options="-parameters" />
+      <module name="Order_Service_M4" options="-parameters" />
+      <module name="Payment_Service_M5" options="-parameters" />
+      <module name="Product_Service_M2" options="-parameters" />
+      <module name="Review_Service_M7" options="-parameters" />
+      <module name="User_Service_M1" options="-parameters" />
+    </option>
+  </component>
+</project>
