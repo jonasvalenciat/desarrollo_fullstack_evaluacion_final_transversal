@@ -15,9 +15,10 @@ spring:
       ddl-auto: create-drop
     show-sql: true
     open-in-view: false
-  logging:
-    level:
-      root: INFO
-      cl.duoc.fullstack.cart_service_m3: DEBUG
-    pattern:
-      console: "%d{HH:mm:ss.SSS} [%-5level] %logger{0} - %msg%n"
+
+logging:
+  level:
+    root: INFO
+    cl.duoc.fullstack.cart_service_m3: DEBUG
+  pattern:
+    console: "%d{HH:mm:ss.SSS} [%-5level] %logger{0} - %msg%n"
