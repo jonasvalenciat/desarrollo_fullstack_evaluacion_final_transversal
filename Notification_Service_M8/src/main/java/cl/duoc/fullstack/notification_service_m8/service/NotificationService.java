@@ -1,5 +1,7 @@
 package cl.duoc.fullstack.notification_service_m8.service;
 
+import cl.duoc.fullstack.notification_service_m8.dto.NotificationRequest;
+import cl.duoc.fullstack.notification_service_m8.dto.NotificationResponse;
 import cl.duoc.fullstack.notification_service_m8.model.Notification;
 import cl.duoc.fullstack.notification_service_m8.repository.NotificationRepository;
 import lombok.RequiredArgsConstructor;
@@ -15,14 +17,32 @@ public class NotificationService {
 
     private final NotificationRepository notificationRepository;
 
-    public Notification sendNotification(Notification notification) {
-        log.info("Enviando notificación de tipo [{}] al usuario ID: {}", notification.getType(), notification.getUserId());
+    public NotificationResponse sendNotification(NotificationRequest request) {
+        log.info("Enviando notificacion de tipo [{}] al usuario ID: {}", request.type(), request.userId());
+
+        Notification notification = new Notification();
+        notification.setUserId(request.userId());
+        notification.setMessage(request.message());
+        notification.setType(request.type());
+
         Notification saved = notificationRepository.save(notification);
-        log.info("Notificación guardada exitosamente con ID: {}", saved.getId());
-        return saved;
+        log.info("Notificacion guardada exitosamente con ID: {}", saved.getId());
+        return toResponse(saved);
     }
 
-    public List<Notification> getNotificationsByUser(Long userId) {
-        return notificationRepository.findByUserId(userId);
+    public List<NotificationResponse> getNotificationsByUser(Long userId) {
+        return notificationRepository.findByUserId(userId)
+                .stream()
+                .map(this::toResponse)
+                .toList();
+    }
+
+    private NotificationResponse toResponse(Notification notification) {
+        return new NotificationResponse(
+                notification.getId(),
+                notification.getUserId(),
+                notification.getMessage(),
+                notification.getType()
+        );
     }
 }
