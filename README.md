@@ -1,6 +1,6 @@
 # Plataforma de Microservicios — Estandarización Técnica
 
-> **Duoc UC — Evaluación 3 / Full Stack**
+> **Duoc UC — Evaluacion Final Transversal / Full Stack**
 >
 > Estandarización de 11 microservicios Spring Boot a una base técnica común:
 > Java 17, Spring Boot 3.4.4, Swagger con `springdoc-openapi`, DTOs,
