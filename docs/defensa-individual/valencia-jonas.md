@@ -1,14 +1,14 @@
-# Defensa Individual Tecnica — Jonás Valencia
+# Defensa Individual Técnica — Jonás Valencia
 
 > **Examen Final Transversal (EFT) — DSY1103**
 >
 > Desarrollo de Software y Arquitectura de Microservicios
 >
-> Profesor Martínez — Duoc UC — Semestral 2025
+> Profesor Martínez — Duoc UC — Semestral 2025 (hito histórico, revisado en 2026)
 
 ---
 
-## 1. Informacion General
+## 1. Información General
 
 | Campo | Detalle |
 |-------|---------|
@@ -19,31 +19,31 @@
 
 ---
 
-## 2. Funcionalidades o Modulos en los que Participé
+## 2. Funcionalidades o Módulos en los que Participé
 
-### 2.1 Gateway_Service_M11 — Modulo de Infraestructura de Enrutamiento
+### 2.1 Gateway_Service_M11 — Módulo de Infraestructura de Enrutamiento
 
-Diseñé e implementé el API Gateway reactivo como punto de entrada unico de todo el ecosistema de 12 microservicios. Configuré las 10 rutas de enrutamiento con `StripPrefix=2`, CORS global para origenes externos, y la dualidad de perfiles: `local` (URLs directas `http://localhost:{puerto}`) y `render` (balanceo de carga via `lb://` con Eureka).
+Diseñé e implementé el API Gateway reactivo como punto de entrada único de todo el ecosistema de 12 microservicios. Configuré las 10 rutas de enrutamiento con `StripPrefix=2`, CORS global para orígenes externos, y la dualidad de perfiles: `local` (URLs directas `http://localhost:{puerto}`) y `render` (balanceo de carga vía `lb://` con Eureka).
 
-### 2.2 Discovery_Server_M12 — Modulo de Descubrimiento Elastico
+### 2.2 Discovery_Server_M12 — Módulo de Descubrimiento Elástico
 
-Configuré el servidor de descubrimiento Netflix Eureka con `@EnableEurekaServer` en el puerto 8761. Implementé la註冊 automática de los 10 microservicios de negocio, el health check periodico para detectar servicios caidos, y el panel de monitoreo en el endpoint `/eureka`.
+Configuré el servidor de descubrimiento Netflix Eureka con `@EnableEurekaServer` en el puerto 8761. Implementé el registro automático de los 10 microservicios de negocio, el health check periódico para detectar servicios caidos, y el panel de monitoreo en el endpoint `/eureka`.
 
 ### 2.3 Suite de Pruebas Automatizadas (JUnit 5 + Mockito)
 
 Diseñé y ejecuté la suite completa de 62 pruebas unitarias en la carpeta `src/test/java` de los 12 servicios bajo la metodología Given-When-Then, logrando cobertura superior al 80% en la capa de servicios.
 
-### 2.4 Automatizacion Cloud Multi-Perfil (render.yaml)
+### 2.4 Automatización Cloud Multi-Perfil (render.yaml)
 
 Orquesté el archivo `render.yaml` que despliega los 12 servicios web + 1 base de datos MySQL en Render, con dependencias configuradas (`dependsOn`) para asegurar que Eureka arranque primero.
 
 ### 2.5 Suite de Pruebas REST (casos-prueba.http)
 
-Diseñé 46 escenarios de prueba en formato IntelliJ HTTP Client apuntando al Gateway, cubriendo casos exitosos, datos invalidos, recursos inexistentes, permisos insuficientes y flujos de negocio completos.
+Diseñé 46 escenarios de prueba en formato IntelliJ HTTP Client apuntando al Gateway, cubriendo casos exitosos, datos inválidos, recursos inexistentes, permisos insuficientes y flujos de negocio completos.
 
 ---
 
-## 3. Commits Propios mas Relevantes
+## 3. Commits Propios más Relevantes
 
 | Hash | Mensaje | Archivos Principales |
 |------|---------|---------------------|
@@ -75,7 +75,7 @@ Diseñé 46 escenarios de prueba en formato IntelliJ HTTP Client apuntando al Ga
 
 ---
 
-## 5. Feedback o Pendiente que Corrigió Personalmente
+## 5. Feedback o Pendiente que Corregí Personalmente
 
 ### 5.1 Erradicacion de Configuraciones Hardcodeadas
 
@@ -107,7 +107,7 @@ eureka:
 
 **Problema:** En entorno local, el Gateway usaba URLs directas (`http://localhost:8081`), pero en Render los servicios tienen IPs y puertos dinamicos asignados por la plataforma.
 
-**Solucion:** Implementé la dualidad de perfiles en el Gateway para usar `lb://SERVICE-NAME` en perfil render, permitiendo que Eureka resuelva las IPs dinamicas:
+**Solucion:** Implementé la dualidad de perfiles en el Gateway para usar `lb://SERVICE-NAME` en perfil render, permitiendo que Eureka resuelva las IPs dinámicas:
 
 ```yaml
 spring:
@@ -122,7 +122,7 @@ spring:
 
 ---
 
-## 6. Archivos Principales que Modificé
+## 6. Archivos Principales que Modifiqué
 
 ### 6.1 Archivos de Gateway y Discovery
 
@@ -289,7 +289,7 @@ void shouldCreatePaymentSuccessfully() {
 
 ---
 
-## 9. Explicacion Breve de una Regla de Negocio que Domino
+## 9. Explicación Breve de una Regla de Negocio que Domino
 
 ### Blindaje Perimetral en Pagos y Resenas
 
@@ -304,7 +304,7 @@ POST /api/v1/payments  {"amount": -500}
 → 400 Bad Request: {"status": 400, "error": "Bad Request", "details": ["amount: must be greater than or equal to 0.01"]}
 ```
 
-**Resena con rating fuera de rango:**
+**Reseña con rating fuera de rango:**
 ```
 POST /api/v1/reviews  {"rating": 6}
 → @Valid activa @Max(5)
@@ -321,7 +321,7 @@ La clave es que `@RestControllerAdvice` + `@Valid` forman un escudo perimetral q
 
 ---
 
-## 10. Explicacion Breve de una Relacion de Base de Datos que Domino
+## 10. Explicación Breve de una Relación de Base de Datos que Domino
 
 ### Aislamiento Total por Entorno
 
@@ -361,7 +361,7 @@ spring:
 
 ---
 
-## 11. Explicacion Breve de una Comunicacion entre Servicios que Domino
+## 11. Explicación Breve de una Comunicación entre Servicios que Domino
 
 ### Resolucion Dinamica via Eureka
 
@@ -385,18 +385,18 @@ El flujo de comunicacion distribuida que domino es la resolucion dinamica de ser
 
 ---
 
-## 12. Dificultad Tecnica Personal y Como la Resolvi
+## 12. Dificultad Técnica Personal y Cómo la Resolví
 
 ### Reto: Desajuste de Timeouts y Fallas de Registro en Render
 
 **Problema:** Al desplegar los microservicios en Render (contenedores gratuitos), los servicios tardaban mas de lo esperado en iniciar debido a la naturaleza efimerica de los contenedores. Eureka registraba los servicios pero ellos se desconectaban antes de completar el registro, causando errores de `DiscoveryClient` y rutas `lb://` que fallaban.
 
-**Causa Raiz:**
+**Causa Raíz:**
 1. Los contenedores gratuitos de Render tienen limites de memoria y CPU
 2. El `leaseRenewalIntervalInSeconds` por defecto era demasiado frecuente (30s)
 3. Los servicios se desconectaban temporalmente durante el cold start
 
-**Solucion:** Optimicé los valores de renovacion de contrato de Eureka y configure variables de entorno dinamicas:
+**Solucion:** Optimicé los valores de renovación de contrato de Eureka y configuré variables de entorno dinámicas:
 
 ```yaml
 # Configuracion optimizada
@@ -412,7 +412,7 @@ server:
   port: ${PORT:8081}
 ```
 
-**Resultado:** Los servicios ahora se registran correctamente en Eureka即使 en contenedores gratuitos, y las rutas `lb://` resuelven las IPs dinamicas de Render sin fallas.
+**Resultado:** Los servicios ahora se registran correctamente en Eureka, incluso en contenedores gratuitos, y las rutas `lb://` resuelven las IPs dinámicas de Render sin fallas.
 
 ---
 
@@ -431,10 +431,10 @@ server:
 - [x] Documentacion tecnica completa (`docs/documentacion-tecnica.md`)
 - [x] Levantamiento de requerimientos actualizado (`docs/levantamiento-requerimientos-actualizado.md`)
 - [x] Presentacion de defensa grupal (`docs/presentacion-defensa-grupal.md`)
-- [x] Todos los cambios commiteados y push a GitHub
+- [x] Todos los cambios commiteados y enviados a GitHub
 
 ---
 
-> **Duoc UC — Examen Final Transversal 2025**
+> **Duoc UC — Examen Final Transversal (hitos 2025, revisado en 2026)**
 >
 > **Estudiante:** Jonás Valencia — Ingeniero DevOps & QA

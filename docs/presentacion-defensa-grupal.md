@@ -1,15 +1,15 @@
-# Presentacion de Defensa Grupal — Ecosystem VJ
+# Presentación de Defensa Grupal — Ecosystem VJ
 
 ---
 
-## 1. Informacion General
+## 1. Información General
 
 | Campo | Detalle |
 |-------|---------|
 | **Nombre del Proyecto** | Ecosystem VJ — E-Commerce de Videojuegos Online |
 | **Asignatura** | DSY1103 — Desarrollo de Software y Arquitectura de Microservicios |
 | **Profesor** | Prof. Martínez |
-| **Institucion** | Duoc UC — Examen Final Transversal (EFT) Semestral 2025 |
+| **Institución** | Duoc UC — Examen Final Transversal (EFT) Semestral 2025 (hito histórico, revisado en 2026) |
 | **Integrante 1** | Jonás Valencia — Ingeniero DevOps & QA |
 | **Integrante 2** | Martín Soto — Arquitecto de Software Full-Stack |
 
@@ -19,17 +19,17 @@
 
 ### 2.1 Contexto del Problema
 
-Las tiendas de videojuegos en linea enfrentan picos de concurrencia masiva durante eventos criticos: lanzamientos de juegos AAA, ofertas de temporada, y eventos de streaming en vivo. Durante estos picos, una arquitectura monolitica tradicional presenta fragilidad significativa:
+Las tiendas de videojuegos en línea enfrentan picos de concurrencia masiva durante eventos críticos: lanzamientos de juegos AAA, ofertas de temporada y eventos de streaming en vivo. Durante estos picos, una arquitectura monolítica tradicional presenta fragilidad significativa:
 
-- **Bloqueos concurrentes en inventario:** Multiples usuarios intentan comprar el mismo juego simultáneamente, generando condiciones de carrera en la tabla de stock. Un monolito tradicional procesa estas peticiones de forma secuencial, causando tiempos de respuesta inaceptables y perdida de ventas.
-- **Puntos unicos de fallo:** Un error en el modulo de pagos puede colapsar todo el sistema, incluyendo catalogo, usuarios y resenas.
-- **Escalabilidad limitada:** No es posible escalar solo el modulo de pagos durante un lanzamiento sin escalar toda la aplicacion, generando desperdicio de recursos.
-- **Despliegue acoplado:** Una actualizacion en el modulo de notificaciones requiere re-desplegar toda la aplicacion, aumentando el riesgo de regresiones.
+- **Bloqueos concurrentes en inventario:** Múltiples usuarios intentan comprar el mismo juego simultáneamente, generando condiciones de carrera en la tabla de stock. Un monolito tradicional procesa estas peticiones de forma secuencial, causando tiempos de respuesta inaceptables y pérdida de ventas.
+- **Puntos únicos de fallo:** Un error en el módulo de pagos puede colapsar todo el sistema, incluyendo catálogo, usuarios y reseñas.
+- **Escalabilidad limitada:** No es posible escalar solo el módulo de pagos durante un lanzamiento sin escalar toda la aplicación, generando desperdicio de recursos.
+- **Despliegue acoplado:** Una actualización en el módulo de notificaciones requiere re-desplegar toda la aplicación, aumentando el riesgo de regresiones.
 
 ### 2.2 Impacto en el Negocio
 
-Durante el lanzamiento de un titulo como "Elden Ring Nightreign", cientos de usuarios simultaneos intentan:
-1. Consultar el catalogo de juegos
+Durante el lanzamiento de un título como "Elden Ring Nightreign", cientos de usuarios simultáneos intentan:
+1. Consultar el catálogo de juegos
 2. Agregar productos al carrito
 3. Procesar pagos
 4. Recibir confirmaciones por email
@@ -38,11 +38,11 @@ En un monolito, estos 4 pasos compiten por los mismos recursos del servidor, gen
 
 ---
 
-## 3. Solucion Propuesta y Alcance
+## 3. Solución Propuesta y Alcance
 
 ### 3.1 Arquitectura Microservicios
 
-Ecosystem VJ implementa una arquitectura de **12 microservicios independientes** que se comunican de forma reactiva y sincrona:
+Ecosystem VJ implementa una arquitectura de **12 microservicios independientes** que se comunican de forma reactiva y síncrona:
 
 | Capa | Servicios | Tecnologia |
 |------|-----------|------------|
@@ -52,7 +52,7 @@ Ecosystem VJ implementa una arquitectura de **12 microservicios independientes**
 | Soporte | Inventory (M6), Review (M7), Notification (M8) | Spring Boot 3.4.4, RestTemplate/RestClient |
 | Autenticacion | Auth (M10) | Spring Security, BCrypt |
 
-### 3.2 Stack Tecnologico
+### 3.2 Stack Tecnológico
 
 | Componente | Tecnologia | Version |
 |------------|------------|---------|
@@ -65,11 +65,11 @@ Ecosystem VJ implementa una arquitectura de **12 microservicios independientes**
 | Gateway | Spring Cloud Gateway | 4.1.1 |
 | Discovery | Netflix Eureka | 4.1.1 |
 | Base de datos (local) | H2 Database | En memoria |
-| Base de datos (produccion) | PostgreSQL / MySQL | Render |
+| Base de datos (producción) | PostgreSQL / MySQL | Render |
 
 ### 3.3 Estrategia Multi-Entorno
 
-- **Perfil `local`:** H2 en memoria, puertos fijos (8080-8090), Eureka en localhost:8761. Sin configuracion externa requerida.
+- **Perfil `local`:** H2 en memoria, puertos fijos (8080-8090), Eureka en localhost:8761. Sin configuración externa requerida.
 - **Perfil `render`:** Variables de entorno (`${PORT}`, `${DATABASE_URL}`, `${EUREKA_URI}`), Eureka centralizado, PostgreSQL via Render.
 
 ---
@@ -78,20 +78,20 @@ Ecosystem VJ implementa una arquitectura de **12 microservicios independientes**
 
 ### 4.1 Endpoints Funcionales via Gateway (Puerto 8080)
 
-| Modulo | Endpoint | Metodo | Funcionalidad | Validaciones |
+| Módulo | Endpoint | Método | Funcionalidad | Validaciones |
 |--------|----------|--------|---------------|-------------|
-| User (M1) | `/api/v1/users` | GET/POST | CRUD de usuarios | `@NotBlank`, `@Email` unico |
+| User (M1) | `/api/v1/users` | GET/POST | CRUD de usuarios | `@NotBlank`, `@Email` único |
 | Product (M2) | `/api/v1/products` | GET/POST/PUT/DELETE | Catalogo completo | `@NotBlank`, `@Min(0)` precio y stock |
 | Cart (M3) | `/api/v1/cart` | GET/POST/PATCH/DELETE | Carrito con seguridad | `@PreAuthorize`, roles ADMIN/USER/AGENT |
-| Order (M4) | `/api/v1/orders` | POST | Creacion de ordenes | Validacion de producto via RestTemplate |
+| Order (M4) | `/api/v1/orders` | POST | Creación de órdenes | Validación de producto vía RestTemplate |
 | Payment (M5) | `/api/v1/payments` | POST | Procesamiento de pagos | `@Positive`, `@DecimalMin("0.01")`, limite $1.000.000 |
-| Inventory (M6) | `/api/v1/inventory` | POST | Gestion de stock | Validacion de producto via RestTemplate |
+| Inventory (M6) | `/api/v1/inventory` | POST | Gestión de stock | Validación de producto vía RestTemplate |
 | Review (M7) | `/api/v1/reviews` | GET/POST | Resenas y calificaciones | `@Min(1) @Max(5)` rating, `@Size(10-500)` comentario |
 | Notification (M8) | `/api/v1/notifications` | POST | Registro de notificaciones | `@Email`, `@Size(5-1000)` mensaje |
-| Category (M9) | `/api/v1/categories` | GET/POST/PUT/DELETE | Categorias | Nombre unico (`unique=true`) |
+| Category (M9) | `/api/v1/categories` | GET/POST/PUT/DELETE | Categorías | Nombre único (`unique=true`) |
 | Auth (M10) | `/api/v1/auth` | POST | Registro y login | `@Size(3-50)` username |
 
-### 4.2 Destacados de Implementacion
+### 4.2 Destacados de Implementación
 
 - **Payment_Service_M5:** Blindaje completo con `PaymentBusinessException` personalizada, HTTP 422 para violaciones de reglas de negocio, y limiter de transaccion a $1.000.000 CLP.
 - **Review_Service_M7:** Rating estricto entre 1 y 5 (`@Min/@Max`), comentario con longitud controlada, y `ErrorResponse.FieldError` estructurado.
@@ -99,13 +99,13 @@ Ecosystem VJ implementa una arquitectura de **12 microservicios independientes**
 
 ---
 
-## 5. Feedback de la Ultima Evaluacion y Correcciones
+## 5. Feedback de la Última Evaluación y Correcciones
 
 ### 5.1 FB-01: GlobalExceptionHandler (@RestControllerAdvice)
 
-**Problema identificado:** Los controladores devolvian mensajes de error inconsistentes (strings plain text, objetos ad-hoc) que dificultaban el consumo por parte del frontend.
+**Problema identificado:** Los controladores devolvían mensajes de error inconsistentes (strings plain text, objetos ad-hoc) que dificultaban el consumo por parte del frontend.
 
-**Solucion implementada:** Se creo `GlobalExceptionHandler.java` en cada microservicio con `@RestControllerAdvice` que intercepta excepciones y devuelve JSON uniformes:
+**Solucion implementada:** Se creó `GlobalExceptionHandler.java` en cada microservicio con `@RestControllerAdvice` que intercepta excepciones y devuelve JSON uniformes:
 
 ```java
 @RestControllerAdvice
@@ -139,7 +139,7 @@ public class GlobalExceptionHandler {
 
 **Problema identificado:** Los controladores no validaban los payloads de entrada, permitiendo que datos inconsistentes llegaran a la capa de persistencia.
 
-**Solucion implementada:** Se anoto cada DTO de entrada con anotaciones Jakarta Validation y se agrego `@Valid` en los parametros de los controladores:
+**Solucion implementada:** Se anoto cada DTO de entrada con anotaciones Jakarta Validation y se agrego `@Valid` en los parámetros de los controladores:
 
 ```java
 @PostMapping
@@ -166,7 +166,7 @@ public ResponseEntity<PaymentResponse> createPayment(@Valid @RequestBody Payment
 
 ### 6.1 API Gateway (Gateway_Service_M11 — Puerto 8080)
 
-Spring Cloud Gateway actua como el **punto de entrada unico** de todo el ecosistema. Todas las peticiones externas pasan por el Gateway, que enruta hacia los microservicios correspondientes:
+Spring Cloud Gateway actúa como el **punto de entrada único** de todo el ecosistema. Todas las peticiones externas pasan por el Gateway, que enruta hacia los microservicios correspondientes:
 
 ```yaml
 spring:
@@ -187,7 +187,7 @@ spring:
             - StripPrefix=2
 ```
 
-**Caracteristicas clave:**
+**Características clave:**
 - 10 rutas configuradas con `StripPrefix=2` para limpiar prefijos
 - Perfil render usa `lb://` para balanceo de carga via Eureka
 - Perfil local usa URLs directas `http://localhost:{puerto}`
@@ -195,14 +195,14 @@ spring:
 
 ### 6.2 Discovery Server (Discovery_Server_M12 — Puerto 8761)
 
-Netflix Eureka Server permite el **descubrimiento automatico** de servicios:
+Netflix Eureka Server permite el **descubrimiento automático** de servicios:
 
 - Los 10 microservicios de negocio se registran automaticamente al iniciar
 - El Gateway resuelve servicios por nombre (`lb://USER-SERVICE-M1`) en lugar de URLs hardcodeadas
-- Health checks automaticos detectan servicios caidos
+- Health checks automáticos detectan servicios caidos
 - Panel de monitoreo disponible en `http://localhost:8761`
 
-### 6.3 Comunicacion Inter-Servicio
+### 6.3 Comunicación Inter-Servicio
 
 | Servicio Origen | Servicio Destino | Mecanismo | Proposito |
 |----------------|-----------------|-----------|-----------|
@@ -212,7 +212,7 @@ Netflix Eureka Server permite el **descubrimiento automatico** de servicios:
 
 ---
 
-## 7. Flujo Funcional y Tecnico (Patron CSR)
+## 7. Flujo Funcional y Técnico (Patrón CSR)
 
 ### 7.1 Arquitectura en Capas
 
@@ -225,7 +225,7 @@ Cliente (Frontend/Mobile)
 ┌─────────────────────────────────────────────┐
 │  API GATEWAY (M11) — Puerto 8080            │
 │  Spring Cloud Gateway + StripPrefix=2       │
-│  Resolucion: lb://SERVICE-NAME via Eureka   │
+│  Resolución: lb://SERVICE-NAME via Eureka   │
 └─────────────────┬───────────────────────────┘
                   │
                   ▼
@@ -237,7 +237,7 @@ Cliente (Frontend/Mobile)
                   │
                   ▼
 ┌─────────────────────────────────────────────┐
-│  @Service — Capa de Logica de Negocio       │
+│  @Service — Capa de Lógica de Negocio       │
 │  Reglas de negocio, validaciones cruzadas,  │
 │  logs con SLF4J para trazabilidad           │
 └─────────────────┬───────────────────────────┘
@@ -294,7 +294,7 @@ logging:
 
 ### 8.2 Estructura Given-When-Then
 
-Cada prueba sigue el patron **Arrange-Act-Assert** con comentarios explicitos:
+Cada prueba sigue el patron **Arrange-Act-Assert** con comentarios explícitos:
 
 ```java
 @Test
@@ -337,7 +337,7 @@ void shouldCreatePaymentSuccessfully() {
 El archivo `docs/pruebas-rest/casos-prueba.http` contiene **46 escenarios** de prueba en formato IntelliJ HTTP Client:
 
 - 14 peticiones exitosas (CRUD completo)
-- 15 casos de datos invalidos (Bean Validation)
+- 15 casos de datos inválidos (Bean Validation)
 - 5 recursos inexistentes (404)
 - 4 permisos insuficientes (401/403)
 - 1 flujo de negocio completo (8 pasos)
@@ -347,9 +347,9 @@ El archivo `docs/pruebas-rest/casos-prueba.http` contiene **46 escenarios** de p
 
 ## 9. Swagger y Despliegue Cloud (Render)
 
-### 9.1 Documentacion API con SpringDoc OpenAPI
+### 9.1 Documentación API con SpringDoc OpenAPI
 
-Cada microservicio incluye `springdoc-openapi-starter-webmvc-ui` que expone la documentacion interactiva:
+Cada microservicio incluye `springdoc-openapi-starter-webmvc-ui` que expone la documentación interactiva:
 
 | Servicio | URL Swagger UI (Local) |
 |----------|----------------------|
@@ -366,7 +366,7 @@ Cada microservicio incluye `springdoc-openapi-starter-webmvc-ui` que expone la d
 
 ### 9.2 Despliegue en Render
 
-El archivo `render.yaml` define la infraestructura como codigo:
+El archivo `render.yaml` define la infraestructura como código:
 
 ```yaml
 services:
@@ -394,7 +394,7 @@ services:
       - discovery-server-m12
 ```
 
-**URLs simuladas de produccion:**
+**URLs simuladas de producción:**
 
 | Servicio | URL Render |
 |----------|-----------|
@@ -406,25 +406,25 @@ services:
 
 **Orden de despliegue automatizado:**
 1. `discovery-server-m12` arranca primero (Eureka Server)
-2. Todos los demas servicios esperan a que Eureka este activo (`dependsOn`)
-3. `gateway-service-m11` se despliega ultimo (necesita Eureka para resolver `lb://`)
+2. Todos los demás servicios esperan a que Eureka esté activo (`dependsOn`)
+3. `gateway-service-m11` se despliega último (necesita Eureka para resolver `lb://`)
 
 ---
 
-## 10. Distribucion de Trabajo
+## 10. Distribución de Trabajo
 
 ### 10.1 Jonás Valencia — Ingeniero DevOps & QA
 
 | Responsabilidad | Detalle |
 |----------------|---------|
-| API Gateway (M11) | Configuracion de Spring Cloud Gateway, 10 rutas `StripPrefix=2`, CORS global, perfiles local/render |
-| Discovery Server (M12) | Implementacion de Netflix Eureka Server con `@EnableEurekaServer`, configuracion de registro |
+| API Gateway (M11) | Configuración de Spring Cloud Gateway, 10 rutas `StripPrefix=2`, CORS global, perfiles local/render |
+| Discovery Server (M12) | Implementación de Netflix Eureka Server con `@EnableEurekaServer`, configuración de registro |
 | render.yaml | Orquestacion completa de 12 servicios + MySQL en Render con `dependsOn` |
-| Eureka Client | Agregacion de `spring-cloud-starter-netflix-eureka-client` a los 11 pom.xml |
-| Perfiles de Entorno | Configuracion de `application.yml` con perfiles `local` y `render` en los 12 servicios |
+| Eureka Client | Agregación de `spring-cloud-starter-netflix-eureka-client` a los 11 pom.xml |
+| Perfiles de Entorno | Configuración de `application.yml` con perfiles `local` y `render` en los 12 servicios |
 | Pruebas Unitarias | Suite completa JUnit 5 + Mockito en los 12 servicios (62 tests totales) |
 | Suite REST | Archivo `docs/pruebas-rest/casos-prueba.http` con 46 escenarios de prueba |
-| Documentacion Tecnica | `docs/documentacion-tecnica.md`, `docs/levantamiento-requerimientos-actualizado.md` |
+| Documentación Técnica | `docs/documentacion-tecnica.md`, `docs/levantamiento-requerimientos-actualizado.md` |
 | Dockerfiles | Archivos Docker multi-stage para despliegue en contenedores |
 
 ### 10.2 Martín Soto — Arquitecto de Software Full-Stack
@@ -432,32 +432,32 @@ services:
 | Responsabilidad | Detalle |
 |----------------|---------|
 | Modelamiento JPA/Hibernate | 10 modelos de dominio (User, Product, CartItem, Order, Payment, Review, Notification, Category, AuthUser, CartHistory) |
-| Logica Core (M1-M10) | Controladores, servicios y repositorios de los 10 microservicios de negocio |
+| Lógica Core (M1-M10) | Controladores, servicios y repositorios de los 10 microservicios de negocio |
 | DTOs y Mapeo | Request/Response DTOs para cada servicio (PaymentRequest, ReviewRequest, etc.) |
-| Bean Validation | Implementacion de anotaciones JSR 380 en todos los DTOs de entrada |
+| Bean Validation | Implementación de anotaciones JSR 380 en todos los DTOs de entrada |
 | GlobalExceptionHandler | `@RestControllerAdvice` uniforme en los 10 servicios con manejo de excepciones |
 | Seguridad (M3) | `@EnableMethodSecurity`, `@PreAuthorize`, `BCryptPasswordEncoder`, `SecurityConfig` |
 | Comunicacion Inter-Servicio | `RestTemplate` (M4, M6) y `RestClient` (M3) para llamadas entre servicios |
 | README.md | Documentacion completa del proyecto con arquitectura, servicios y endpoints |
-| Documentacion Funcional | `docs/documentacion-funcional.md` con flujos, reglas de negocio y payloads |
+| Documentación Funcional | `docs/documentacion-funcional.md` con flujos, reglas de negocio y payloads |
 
 ---
 
 ## 11. Conclusiones
 
-Ecosystem VJ demuestra que la arquitectura de microservicios es una solucion viable y escalable para el comercio electronico de videojuegos. Los 12 microservicios implementados cubren los requerimientos fundamentales de un e-commerce real:
+Ecosystem VJ demuestra que la arquitectura de microservicios es una solución viable y escalable para el comercio electrónico de videojuegos. Los 12 microservicios implementados cubren los requerimientos fundamentales de un e-commerce real:
 
 - **Catalogo completo** con CRUD de productos, categorias y usuarios
-- **Seguridad por roles** con autenticacion basica y autorizacion por endpoints
-- **Validacion robusta** con Bean Validation JSR 380 en todos los puntos de entrada
+- **Seguridad por roles** con autenticación básica y autorización por endpoints
+- **Validación robusta** con Bean Validation JSR 380 en todos los puntos de entrada
 - **Manejo uniforme de errores** con GlobalExceptionHandler en todos los servicios
-- **Infraestructura cloud** lista para despliegue en Render con orquestacion automatica
+- **Infraestructura cloud** lista para despliegue en Render con orquestación automática
 - **Pruebas automatizadas** con 62 pruebas unitarias y 46 escenarios REST
 
-El trabajo colaborativo entre DevOps y Arquitecto Full-Stack permitio entregar un proyecto completo, documentado y funcionando en entorno local y preparado para produccion.
+El trabajo colaborativo entre DevOps y Arquitecto Full-Stack permitió entregar un proyecto completo, documentado y funcionando en entorno local y preparado para producción.
 
 ---
 
-> **Duoc UC — Examen Final Transversal 2025**
+> **Duoc UC — Examen Final Transversal (hitos 2025, revisado en 2026)**
 >
 > **Integrantes:** Jonás Valencia | Martín Soto

@@ -15,7 +15,7 @@
 | **Proyecto** | GameVerse — Tienda de Videojuegos Online |
 | **Asignatura** | DSY1103 — Desarrollo Full Stack |
 | **Institución** | Duoc UC |
-| **Semestre** | 2025-2 |
+| **Semestre (actualización documental)** | 2026 |
 
 | # | Integrante | Rol |
 |---|-----------|-----|
@@ -100,7 +100,7 @@ desarrollo_fullstack_evaluacion_final_transversal/
 ├── Auth_Service_M10/              # Autenticación (:8090)
 │
 ├── render.yaml                    # Despliegue en Render
-├── MATRIZ_REQUERIMIENTOS.md       # Trazabilidad de requisitos
+├── docs/matriz-requerimientos.md      # Trazabilidad de requerimientos
 └── README.md                      # Este archivo
 ```
 
@@ -472,4 +472,4 @@ Render respeta las dependencias definidas en `dependsOn`:
 
 ---
 
-> **Duoc UC — Evaluación Final Transversal 2025**
+> **Duoc UC — Evaluación Final Transversal (actualizado 2026)**
