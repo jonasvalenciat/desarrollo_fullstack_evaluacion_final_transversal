@@ -2,10 +2,11 @@
 
 > **Duoc UC — Evaluación 3 / Full Stack**
 >
-> Estandarización de 10 microservicios Spring Boot a una base técnica común:
+> Estandarización de 11 microservicios Spring Boot a una base técnica común:
 > Java 17, Spring Boot 3.4.4, Swagger con `springdoc-openapi`, DTOs,
-> manejo global de excepciones, pruebas unitarias con Mockito y
-> contenedorización multi-stage con Alpine Linux.
+> manejo global de excepciones, pruebas unitarias con Mockito,
+> contenedorización multi-stage con Alpine Linux y **API Gateway centralizado**
+> con Spring Cloud Gateway.
 
 ---
 
@@ -52,9 +53,108 @@ de la línea 3.x, con soporte completo para Java 17 y el ecosistema
 
 ---
 
-## 2. Cumplimiento de la Rúbrica
+## 2. Arquitectura del Sistema
 
-### 2.1 Configuración YAML (IE 3.3.4) ✅
+### 2.1 API Gateway — Punto de Entrada Único (M11)
+
+El sistema implementa un **API Gateway centralizado** mediante el módulo
+`Gateway_Service_M11`, construido con **Spring Cloud Gateway** (2024.0.1)
+sobre Spring Boot 3.4.4. Este componente actúa como el **punto de entrada
+único** de toda la plataforma, ejecutándose en el **puerto 8080**.
+
+```yaml
+# application.yml del Gateway
+server:
+  port: 8080
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: payment-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - StripPrefix=2
+```
+
+#### Rutas configuradas
+
+| Servicio | Prefijo de ruta | Destino | Puerto |
+|---|---|---|---|
+| Auth_Service_M10 | `/api/v1/auth/**` | `localhost:8090` | 8090 |
+| User_Service_M1 | `/api/v1/users/**` | `localhost:8081` | 8081 |
+| Product_Service_M2 | `/api/v1/products/**` | `localhost:8082` | 8082 |
+| Cart_Service_M3 | `/api/v1/cart/**` | `localhost:8083` | 8083 |
+| Order_Service_M4 | `/api/v1/orders/**` | `localhost:8084` | 8084 |
+| Payment_Service_M5 | `/api/v1/payments/**` | `localhost:8085` | 8085 |
+| Inventory_Service_M6 | `/api/v1/inventory/**` | `localhost:8086` | 8086 |
+| Review_Service_M7 | `/api/v1/reviews/**` | `localhost:8087` | 8087 |
+| Notification_Service_M8 | `/api/v1/notifications/**` | `localhost:8088` | 8088 |
+| Category_Service_M9 | `/api/v1/categories/**` | `localhost:8089` | 8089 |
+
+Todas las rutas utilizan el filtro `StripPrefix=2`, que elimina los
+prefijos `/api/v1` antes de reenviar la petición al microservicio
+destino. Por ejemplo, una petición a `GET /api/v1/payments/1` se
+redirige internamente a `GET http://localhost:8085/payments/1`.
+
+El Gateway también configura **CORS global** para permitir orígenes,
+métodos y headers arbitrarios (`allowedOrigins: "*"`), facilitando
+la integración con frontends en desarrollo.
+
+#### Arquitectura de enrutamiento
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                    Cliente (Frontend)                    │
+│                     localhost:8080                       │
+└───────────────────────┬─────────────────────────────────┘
+                        │  /api/v1/{recurso}/**
+                        ▼
+┌─────────────────────────────────────────────────────────┐
+│            Gateway_Service_M11 (Puerto 8080)             │
+│              Spring Cloud Gateway + StripPrefix=2        │
+├─────────┬─────────┬─────────┬─────────┬─────────────────┤
+│  /auth  │ /users  │/products│  /cart  │    /orders      │
+│  →8090  │ →8081   │ →8082   │ →8083   │    →8084        │
+├─────────┼─────────┼─────────┼─────────┼─────────────────┤
+│/payments│/invent. │/reviews │/notif.  │  /categories    │
+│  →8085  │ →8086   │ →8087   │ →8088   │    →8089        │
+└─────────┴─────────┴─────────┴─────────┴─────────────────┘
+```
+
+### 2.2 Robustecimiento de Validaciones y Reglas de Negocio
+
+Se homogenizaron y robustecieron las validaciones **JSR 380 (Bean
+Validation)** en los servicios de **Payment**, **Review** y
+**Notification**, incorporando:
+
+- **Anotaciones Jakarta** en los DTOs de entrada (`@NotNull`,
+  `@NotBlank`, `@Positive`, `@DecimalMin`, `@Min`, `@Max`,
+  `@Size`, `@Email`) con mensajes descriptivos en español.
+- **Manejo centralizado de excepciones** mediante
+  `@RestControllerAdvice` en cada servicio, capturando
+  `MethodArgumentNotValidException` y concatenando los errores
+  de campo en una respuesta estructurada.
+- **Excepciones de negocio personalizadas** (ej.
+  `PaymentBusinessException`) con códigos de error
+  (`PAYMENT_NOT_FOUND`, `INVALID_ORDER_ID`, `AMOUNT_EXCEEDS_LIMIT`)
+  y HTTP 422 para violaciones de reglas de negocio.
+- **Límites de transacción** en Payment (monto máximo de
+  $1.000.000) para detectar transacciones sospechosas.
+
+| Servicio | Validaciones JSR 380 | Reglas de negocio | Exception handler |
+|---|---|---|---|
+| Payment | `@NotNull`, `@Positive`, `@DecimalMin` | Límite de monto, ID positivo | `PaymentBusinessException` → 422 |
+| Review | `@NotNull`, `@Min`, `@Max`, `@Size`, `@NotBlank` | Rating 1-5, comentario 10-500 chars | `IllegalArgumentException` → 400 |
+| Notification | `@NotNull`, `@NotBlank`, `@Email`, `@Size` | Formato email, mensaje 5-1000 chars | `MethodArgumentNotValidException` → 400 |
+
+---
+
+## 3. Cumplimiento de la Rúbrica
+
+### 3.1 Configuración YAML (IE 3.3.4) ✅
 
 Todos los microservicios refactorizados reemplazaron el plano
 `application.properties` por **YAML estructurado** con dos perfiles:
@@ -98,7 +198,7 @@ La separación por perfiles permite activar `h2` en desarrollo y
 preparar un perfil `mysql` para producción sin modificar la
 configuración base.
 
-### 2.2 Protección de Datos con DTOs (IE 3.3.4) ✅
+### 3.2 Protección de Datos con DTOs (IE 3.3.4) ✅
 
 Cada microservicio implementa **tres capas de DTOs** que aislan
 completamente la entidad JPA de la capa de presentación:
@@ -130,7 +230,7 @@ public class AuthRegisterResponse {
 }
 ```
 
-### 2.3 Documentación Viva con Swagger (IE 3.2.1) ✅
+### 3.3 Documentación Viva con Swagger (IE 3.2.1) ✅
 
 Cada `@RestController` está anotado con `@Tag`, `@Operation` y
 `@ApiResponses` de `springdoc-openapi`:
@@ -154,7 +254,7 @@ public class OrderController {
 
 La UI de Swagger está disponible en `http://localhost:{puerto}/swagger-ui.html`.
 
-### 2.4 Manejo Global de Excepciones (IE 2.4.1) ✅
+### 3.4 Manejo Global de Excepciones (IE 2.4.1) ✅
 
 Todos los servicios implementan `@RestControllerAdvice` con un
 `GlobalExceptionHandler` que captura y normaliza las excepciones:
@@ -179,7 +279,7 @@ public class GlobalExceptionHandler {
 }
 ```
 
-### 2.5 Pruebas Unitarias con // Given — // When — // Then (IE 3.1.1) ✅
+### 3.5 Pruebas Unitarias con // Given — // When — // Then (IE 3.1.1) ✅
 
 Cada microservicio refactorizado incluye **al menos 4 pruebas
 unitarias** sobre la capa de servicio usando **Mockito** y la
@@ -213,7 +313,7 @@ void getOrderById_WhenExists_ShouldReturnOrder() {
 | CategoryServiceTest | 7 |
 | AuthServiceTest | 4 |
 
-### 2.6 Dockerfiles Multi-Stage Alpine (IE 3.3.1) ✅
+### 3.6 Dockerfiles Multi-Stage Alpine (IE 3.3.1) ✅
 
 Cada microservicio incluye un `Dockerfile` multi-stage que minimiza
 el tamaño de la imagen final:
@@ -243,10 +343,11 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 | # | Directorio | Puerto | Artefacto |
 |---|---|---|---|
+| **M11** | **`Gateway_Service_M11`** | **8080** | **`Gateway_Service_M11`** |
 | M1 | `User_Service_M1` | 8081 | `User_Service_M1` |
 | M2 | `Product_Service_M2` | 8082 | `Product_Service_M2` |
-| M3 | `Cart_Service_M3` | 8080 | `Cart_Service_M3` |
-| M4 | `Order_Service_M4` | 8083 | `Order_Service_M4` |
+| M3 | `Cart_Service_M3` | 8083 | `Cart_Service_M3` |
+| M4 | `Order_Service_M4` | 8084 | `Order_Service_M4` |
 | M5 | `Payment_Service_M5` | 8085 | `Payment_Service_M5` |
 | M6 | `Inventory_Service_M6` | 8086 | `Inventory_Service_M6` |
 | M7 | `Review_Service_M7` | 8087 | `Review_Service_M7` |
@@ -256,13 +357,13 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ---
 
-## 4. Ejecución en Local
+## 5. Ejecución en Local
 
 Cada microservicio se ejecuta de forma independiente. Asegúrate de
 tener **Java 17** y **Maven** instalados (o usa el Maven wrapper
 incluido).
 
-### 4.1 Compilar y ejecutar pruebas
+### 5.1 Compilar y ejecutar pruebas
 
 ```bash
 cd Cart_Service_M3
@@ -276,14 +377,22 @@ Salida esperada:
 [INFO] BUILD SUCCESS
 ```
 
-### 4.2 Ejecutar el servicio
+### 5.2 Ejecutar el servicio
 
 ```bash
 cd Cart_Service_M3
 ./mvnw spring-boot:run
 ```
 
-### 4.3 Construir imagen Docker
+> **Nota:** Para ejecutar el API Gateway (puerto 8080):
+> ```bash
+> cd Gateway_Service_M11
+> ./mvnw spring-boot:run
+> ```
+> El Gateway debe iniciarse **después** de los microservicios que
+> va a enrutar, ya que realiza proxies hacia sus direcciones.
+
+### 5.3 Construir imagen Docker
 
 ```bash
 cd Cart_Service_M3
@@ -291,7 +400,7 @@ docker build -t cart-service-m3 .
 docker run -p 8080:8080 cart-service-m3
 ```
 
-### 4.4 Acceder a Swagger UI
+### 5.4 Acceder a Swagger UI
 
 ```
 http://localhost:{puerto}/swagger-ui.html
@@ -299,7 +408,7 @@ http://localhost:{puerto}/swagger-ui.html
 
 ---
 
-## 5. Estructura Interna Refactorizada
+## 6. Estructura Interna Refactorizada
 
 ```
 Cart_Service_M3/
@@ -332,7 +441,7 @@ Cart_Service_M3/
 
 ---
 
-## 6. Commits de Referencia
+## 7. Commits de Referencia
 
 | Módulo | Commit | Descripción |
 |---|---|---|
@@ -344,6 +453,7 @@ Cart_Service_M3/
 | M8 | `aebd7b5` | Migración Notification Service |
 | M9 | `47e5447` | Migración Category Service |
 | M10 | `d73856a` | Migración Auth Service |
+| **M11** | `—` | **API Gateway con Spring Cloud Gateway** |
 
 ---
 
