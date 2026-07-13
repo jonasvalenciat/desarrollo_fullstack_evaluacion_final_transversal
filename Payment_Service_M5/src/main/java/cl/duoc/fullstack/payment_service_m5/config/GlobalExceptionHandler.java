@@ -1,6 +1,7 @@
 package cl.duoc.fullstack.payment_service_m5.config;
 
 import cl.duoc.fullstack.payment_service_m5.dto.ErrorResponse;
+import cl.duoc.fullstack.payment_service_m5.exception.PaymentBusinessException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex) {
-        log.warn("Validacion fallida: {}", ex.getMessage());
+        log.warn("Validación fallida: {}", ex.getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new ErrorResponse(ex.getMessage()));
     }
@@ -32,15 +33,22 @@ public class GlobalExceptionHandler {
         String message = ex.getBindingResult().getFieldErrors().stream()
                 .map(err -> err.getField() + ": " + err.getDefaultMessage())
                 .reduce((a, b) -> a + "; " + b)
-                .orElse("Validacion fallida");
-        log.warn("Validacion de argumentos: {}", message);
+                .orElse("Validación fallida");
+        log.warn("Validación de argumentos: {}", message);
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(new ErrorResponse(message));
+                .body(new ErrorResponse(message, "VALIDATION_ERROR"));
+    }
+
+    @ExceptionHandler(PaymentBusinessException.class)
+    public ResponseEntity<ErrorResponse> handlePaymentBusiness(PaymentBusinessException ex) {
+        log.warn("Regla de negocio violada [{}]: {}", ex.getCode(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new ErrorResponse(ex.getMessage(), ex.getCode()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneral(Exception ex) {
-        log.error("Excepcion no capturada", ex);
+        log.error("Excepción no capturada", ex);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(new ErrorResponse("Error interno del servidor"));
     }

@@ -1,0 +1,13 @@
+package cl.duoc.fullstack.gateway_service_m11;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class GatewayServiceM11ApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}

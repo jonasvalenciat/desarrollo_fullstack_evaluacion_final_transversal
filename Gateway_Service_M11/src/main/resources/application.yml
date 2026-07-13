@@ -1,0 +1,124 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway-service-m11
+
+  cloud:
+    gateway:
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin
+
+      globalcors:
+        cors-configurations:
+          "[/**]":
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+      routes:
+        # ============================================
+        # 1. Auth_Service_M10
+        # ============================================
+        - id: auth-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/api/v1/auth/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 2. User_Service_M1
+        # ============================================
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/users/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 3. Product_Service_M2
+        # ============================================
+        - id: product-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/products/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 4. Cart_Service_M3
+        # ============================================
+        - id: cart-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/cart/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 5. Order_Service_M4
+        # ============================================
+        - id: order-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/orders/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 6. Payment_Service_M5
+        # ============================================
+        - id: payment-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/v1/payments/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 7. Inventory_Service_M6
+        # ============================================
+        - id: inventory-service
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/v1/inventory/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 8. Review_Service_M7
+        # ============================================
+        - id: review-service
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/v1/reviews/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 9. Notification_Service_M8
+        # ============================================
+        - id: notification-service
+          uri: http://localhost:8088
+          predicates:
+            - Path=/api/v1/notifications/**
+          filters:
+            - StripPrefix=2
+
+        # ============================================
+        # 10. Category_Service_M9
+        # ============================================
+        - id: category-service
+          uri: http://localhost:8089
+          predicates:
+            - Path=/api/v1/categories/**
+          filters:
+            - StripPrefix=2
+
+logging:
+  level:
+    root: INFO
+    org.springframework.cloud.gateway: DEBUG

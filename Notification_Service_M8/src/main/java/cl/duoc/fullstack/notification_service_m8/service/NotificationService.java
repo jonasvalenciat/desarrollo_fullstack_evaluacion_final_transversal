@@ -22,6 +22,7 @@ public class NotificationService {
 
         Notification notification = new Notification();
         notification.setUserId(request.userId());
+        notification.setRecipient(request.recipient());
         notification.setMessage(request.message());
         notification.setType(request.type());
 
@@ -41,6 +42,7 @@ public class NotificationService {
         return new NotificationResponse(
                 notification.getId(),
                 notification.getUserId(),
+                notification.getRecipient(),
                 notification.getMessage(),
                 notification.getType()
         );

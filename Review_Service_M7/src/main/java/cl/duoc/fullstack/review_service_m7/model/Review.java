@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class Review {
     @Max(value = 5, message = "La calificación máxima es 5 estrellas")
     private Integer rating;
 
-    @Size(max = 500, message = "El comentario no puede exceder los 500 caracteres")
+    @NotBlank(message = "El comentario es obligatorio")
+    @Size(min = 10, max = 500, message = "El comentario debe tener entre 10 y 500 caracteres")
     private String comment;
 }

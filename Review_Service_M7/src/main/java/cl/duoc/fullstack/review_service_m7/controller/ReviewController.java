@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,6 +40,18 @@ public class ReviewController {
     public ResponseEntity<ReviewResponse> createReview(@Valid @RequestBody ReviewRequest request) {
         ReviewResponse created = reviewService.createReview(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Actualizar una resena", description = "Actualiza una resena existente por su ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Resena actualizada exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Datos de entrada invalidos"),
+            @ApiResponse(responseCode = "404", description = "Resena no encontrada")
+    })
+    public ResponseEntity<ReviewResponse> updateReview(@PathVariable Long id, @Valid @RequestBody ReviewRequest request) {
+        ReviewResponse updated = reviewService.updateReview(id, request);
+        return ResponseEntity.ok(updated);
     }
 
     @GetMapping("/product/{productId}")

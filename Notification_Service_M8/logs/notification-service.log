@@ -1,0 +1,78 @@
+2026-07-13T02:01:31.804-04:00  INFO 10968 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Starting NotificationServiceM8ApplicationTests using Java 17.0.12 with PID 10968 (started by jonas in C:\Users\jonas\Desktop\evaluacion3-videojuegos\Notification_Service_M8)
+2026-07-13T02:01:31.838-04:00 DEBUG 10968 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Running with Spring Boot v3.4.4, Spring v6.2.5
+2026-07-13T02:01:31.842-04:00  INFO 10968 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : The following 1 profile is active: "h2"
+2026-07-13T02:01:35.592-04:00  INFO 10968 --- [notification-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-13T02:01:35.781-04:00  INFO 10968 --- [notification-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 129 ms. Found 1 JPA repository interface.
+2026-07-13T02:01:37.197-04:00  INFO 10968 --- [notification-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-13T02:01:37.416-04:00  INFO 10968 --- [notification-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-07-13T02:01:37.547-04:00  INFO 10968 --- [notification-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-13T02:01:38.620-04:00  INFO 10968 --- [notification-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-13T02:01:38.704-04:00  INFO 10968 --- [notification-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-13T02:01:39.155-04:00  INFO 10968 --- [notification-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notification_db user=SA
+2026-07-13T02:01:39.158-04:00  INFO 10968 --- [notification-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-13T02:01:39.209-04:00  WARN 10968 --- [notification-service] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-13T02:01:39.255-04:00  INFO 10968 --- [notification-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-13T02:01:40.933-04:00  INFO 10968 --- [notification-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-13T02:01:41.027-04:00  INFO 10968 --- [notification-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T02:01:42.815-04:00  WARN 10968 --- [notification-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 2e597dd0-7589-456a-b10d-46a5e96ab65e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-13T02:01:42.911-04:00  INFO 10968 --- [notification-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-13T02:01:45.811-04:00  INFO 10968 --- [notification-service] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notification_db'
+2026-07-13T02:01:46.276-04:00  INFO 10968 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Started NotificationServiceM8ApplicationTests in 16.451 seconds (process running for 18.784)
+2026-07-13T02:01:49.117-04:00  INFO 10968 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Enviando notificacion de tipo [SMS] al usuario ID: 2
+2026-07-13T02:01:49.145-04:00  INFO 10968 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Notificacion guardada exitosamente con ID: 2
+2026-07-13T02:01:49.235-04:00  INFO 10968 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Enviando notificacion de tipo [EMAIL] al usuario ID: 1
+2026-07-13T02:01:49.235-04:00  INFO 10968 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Notificacion guardada exitosamente con ID: 1
+2026-07-13T02:01:49.377-04:00  INFO 10968 --- [notification-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T02:01:49.389-04:00  INFO 10968 --- [notification-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-13T02:01:49.396-04:00  INFO 10968 --- [notification-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-13T02:04:10.240-04:00  INFO 19436 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Starting NotificationServiceM8ApplicationTests using Java 17.0.12 with PID 19436 (started by jonas in C:\Users\jonas\Desktop\evaluacion3-videojuegos\Notification_Service_M8)
+2026-07-13T02:04:10.263-04:00 DEBUG 19436 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Running with Spring Boot v3.4.4, Spring v6.2.5
+2026-07-13T02:04:10.265-04:00  INFO 19436 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : The following 1 profile is active: "h2"
+2026-07-13T02:04:14.036-04:00  INFO 19436 --- [notification-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-13T02:04:14.153-04:00  INFO 19436 --- [notification-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 98 ms. Found 1 JPA repository interface.
+2026-07-13T02:04:15.570-04:00  INFO 19436 --- [notification-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-13T02:04:15.811-04:00  INFO 19436 --- [notification-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-07-13T02:04:15.909-04:00  INFO 19436 --- [notification-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-13T02:04:16.807-04:00  INFO 19436 --- [notification-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-13T02:04:16.882-04:00  INFO 19436 --- [notification-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-13T02:04:17.416-04:00  INFO 19436 --- [notification-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:notification_db user=SA
+2026-07-13T02:04:17.421-04:00  INFO 19436 --- [notification-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-13T02:04:17.472-04:00  WARN 19436 --- [notification-service] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-13T02:04:17.519-04:00  INFO 19436 --- [notification-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-13T02:04:19.232-04:00  INFO 19436 --- [notification-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-13T02:04:19.316-04:00  INFO 19436 --- [notification-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T02:04:20.588-04:00  WARN 19436 --- [notification-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 544574e3-77c7-4814-9a6d-c274182ce019
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-13T02:04:20.671-04:00  INFO 19436 --- [notification-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-13T02:04:23.361-04:00  INFO 19436 --- [notification-service] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:notification_db'
+2026-07-13T02:04:23.522-04:00  INFO 19436 --- [notification-service] [main] .n.NotificationServiceM8ApplicationTests : Started NotificationServiceM8ApplicationTests in 42.926 seconds (process running for 45.544)
+2026-07-13T02:04:25.565-04:00  INFO 19436 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Enviando notificacion de tipo [SMS] al usuario ID: 2
+2026-07-13T02:04:25.580-04:00  INFO 19436 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Notificacion guardada exitosamente con ID: 2
+2026-07-13T02:04:25.716-04:00  INFO 19436 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Enviando notificacion de tipo [EMAIL] al usuario ID: 1
+2026-07-13T02:04:25.720-04:00  INFO 19436 --- [notification-service] [main] c.d.f.n.service.NotificationService      : Notificacion guardada exitosamente con ID: 1
+2026-07-13T02:04:25.862-04:00  INFO 19436 --- [notification-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T02:04:25.876-04:00  INFO 19436 --- [notification-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-13T02:04:25.887-04:00  INFO 19436 --- [notification-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

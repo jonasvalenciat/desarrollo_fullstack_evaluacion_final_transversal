@@ -1,0 +1,131 @@
+2026-07-13T01:35:21.929-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Starting PaymentServiceM5ApplicationTests using Java 17.0.12 with PID 5688 (started by jonas in C:\Users\jonas\Desktop\evaluacion3-videojuegos\Payment_Service_M5)
+2026-07-13T01:35:21.940-04:00 DEBUG 5688 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Running with Spring Boot v3.4.4, Spring v6.2.5
+2026-07-13T01:35:21.942-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : The following 1 profile is active: "h2"
+2026-07-13T01:35:24.639-04:00  INFO 5688 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-13T01:35:24.805-04:00  INFO 5688 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 124 ms. Found 1 JPA repository interface.
+2026-07-13T01:35:26.001-04:00  INFO 5688 --- [payment-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-13T01:35:26.220-04:00  INFO 5688 --- [payment-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-07-13T01:35:26.425-04:00  INFO 5688 --- [payment-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-13T01:35:27.331-04:00  INFO 5688 --- [payment-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-13T01:35:27.388-04:00  INFO 5688 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-13T01:35:27.738-04:00  INFO 5688 --- [payment-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:payments_db user=SA
+2026-07-13T01:35:27.740-04:00  INFO 5688 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-13T01:35:27.787-04:00  WARN 5688 --- [payment-service] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-13T01:35:27.827-04:00  INFO 5688 --- [payment-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-13T01:35:29.282-04:00  INFO 5688 --- [payment-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-13T01:35:29.368-04:00  INFO 5688 --- [payment-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:35:30.254-04:00  WARN 5688 --- [payment-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: fbef663d-bb29-4b96-9655-2aef023971c3
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-13T01:35:30.324-04:00  INFO 5688 --- [payment-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-13T01:35:31.691-04:00  INFO 5688 --- [payment-service] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:payments_db'
+2026-07-13T01:35:31.851-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Started PaymentServiceM5ApplicationTests in 10.835 seconds (process running for 13.165)
+2026-07-13T01:35:33.344-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:35:33.357-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 1
+2026-07-13T01:35:33.453-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 5
+2026-07-13T01:35:33.453-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 2
+2026-07-13T01:35:33.459-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:35:33.460-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 1
+2026-07-13T01:35:33.470-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 10
+2026-07-13T01:35:33.471-04:00  INFO 5688 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 100
+2026-07-13T01:35:33.564-04:00  INFO 5688 --- [payment-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:35:33.575-04:00  INFO 5688 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-13T01:35:33.581-04:00  INFO 5688 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-13T01:45:28.224-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Starting PaymentServiceM5ApplicationTests using Java 17.0.12 with PID 13148 (started by jonas in C:\Users\jonas\Desktop\evaluacion3-videojuegos\Payment_Service_M5)
+2026-07-13T01:45:28.230-04:00 DEBUG 13148 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Running with Spring Boot v3.4.4, Spring v6.2.5
+2026-07-13T01:45:28.232-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : The following 1 profile is active: "h2"
+2026-07-13T01:45:30.239-04:00  INFO 13148 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-13T01:45:30.366-04:00  INFO 13148 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 1 JPA repository interface.
+2026-07-13T01:45:31.317-04:00  INFO 13148 --- [payment-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-13T01:45:31.476-04:00  INFO 13148 --- [payment-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-07-13T01:45:31.589-04:00  INFO 13148 --- [payment-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-13T01:45:32.349-04:00  INFO 13148 --- [payment-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-13T01:45:32.412-04:00  INFO 13148 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-13T01:45:32.810-04:00  INFO 13148 --- [payment-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:payments_db user=SA
+2026-07-13T01:45:32.813-04:00  INFO 13148 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-13T01:45:32.861-04:00  WARN 13148 --- [payment-service] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-13T01:45:32.902-04:00  INFO 13148 --- [payment-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-13T01:45:34.444-04:00  INFO 13148 --- [payment-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-13T01:45:34.515-04:00  INFO 13148 --- [payment-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:45:35.217-04:00  WARN 13148 --- [payment-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: c717e95e-abe3-4301-be79-c81cbddac1b1
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-13T01:45:35.286-04:00  INFO 13148 --- [payment-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-13T01:45:36.572-04:00  INFO 13148 --- [payment-service] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:payments_db'
+2026-07-13T01:45:36.692-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Started PaymentServiceM5ApplicationTests in 9.428 seconds (process running for 11.526)
+2026-07-13T01:45:38.130-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:45:38.144-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 1
+2026-07-13T01:45:38.230-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 5
+2026-07-13T01:45:38.231-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 2
+2026-07-13T01:45:38.241-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: -1
+2026-07-13T01:45:38.251-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:45:38.273-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 10
+2026-07-13T01:45:38.274-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 100
+2026-07-13T01:45:38.282-04:00  INFO 13148 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:45:38.352-04:00  INFO 13148 --- [payment-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:45:38.361-04:00  INFO 13148 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-13T01:45:38.367-04:00  INFO 13148 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-07-13T01:46:52.883-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Starting PaymentServiceM5ApplicationTests using Java 17.0.12 with PID 17172 (started by jonas in C:\Users\jonas\Desktop\evaluacion3-videojuegos\Payment_Service_M5)
+2026-07-13T01:46:52.886-04:00 DEBUG 17172 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Running with Spring Boot v3.4.4, Spring v6.2.5
+2026-07-13T01:46:52.889-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : The following 1 profile is active: "h2"
+2026-07-13T01:46:54.988-04:00  INFO 17172 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-13T01:46:55.124-04:00  INFO 17172 --- [payment-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 106 ms. Found 1 JPA repository interface.
+2026-07-13T01:46:56.175-04:00  INFO 17172 --- [payment-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-13T01:46:56.289-04:00  INFO 17172 --- [payment-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.11.Final
+2026-07-13T01:46:56.410-04:00  INFO 17172 --- [payment-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-13T01:46:57.210-04:00  INFO 17172 --- [payment-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-13T01:46:57.297-04:00  INFO 17172 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-13T01:46:57.590-04:00  INFO 17172 --- [payment-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:payments_db user=SA
+2026-07-13T01:46:57.592-04:00  INFO 17172 --- [payment-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-13T01:46:57.635-04:00  WARN 17172 --- [payment-service] [main] org.hibernate.orm.deprecation            : HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-13T01:46:57.672-04:00  INFO 17172 --- [payment-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-13T01:46:58.904-04:00  INFO 17172 --- [payment-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-13T01:46:58.965-04:00  INFO 17172 --- [payment-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:46:59.544-04:00  WARN 17172 --- [payment-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6b8acdde-28dd-469f-8c82-a74b1f40687e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2026-07-13T01:46:59.582-04:00  INFO 17172 --- [payment-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2026-07-13T01:47:00.688-04:00  INFO 17172 --- [payment-service] [main] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:payments_db'
+2026-07-13T01:47:00.809-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.PaymentServiceM5ApplicationTests : Started PaymentServiceM5ApplicationTests in 8.927 seconds (process running for 10.843)
+2026-07-13T01:47:02.240-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:47:02.253-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 1
+2026-07-13T01:47:02.370-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 5
+2026-07-13T01:47:02.371-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 2
+2026-07-13T01:47:02.378-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: -1
+2026-07-13T01:47:02.387-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:47:02.411-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 10
+2026-07-13T01:47:02.412-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Pago procesado exitosamente con ID: 100
+2026-07-13T01:47:02.425-04:00  INFO 17172 --- [payment-service] [main] c.d.f.p.service.PaymentService           : Procesando pago para la orden ID: 1
+2026-07-13T01:47:02.520-04:00  INFO 17172 --- [payment-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-07-13T01:47:02.535-04:00  INFO 17172 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-07-13T01:47:02.542-04:00  INFO 17172 --- [payment-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

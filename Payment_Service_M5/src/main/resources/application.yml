@@ -9,6 +9,10 @@ spring:
     show-sql: false
 server:
   port: 8085
+  connection-timeout: 5000
+  tomcat:
+    connection-timeout: 5000
+    keep-alive-timeout: 5000
 
 logging:
   level:
