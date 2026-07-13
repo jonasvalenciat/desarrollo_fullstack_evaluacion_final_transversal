@@ -1,0 +1,415 @@
+/**
+ * GameVerse — Suite de Pruebas REST
+ * 
+ * Asignatura: DSY1103 — Desarrollo Full Stack
+ * Proyecto: GameVerse — Tienda de Videojuegos Online
+ * Seccion de Rubrica: 4.2.7
+ * 
+ * Instrucciones:
+ * 1. Asegurate de que todos los microservicios esten ejecutandose (orden: M12, M11, M1-M10)
+ * 2. Las variables se definen abajo; modificalas segun tu entorno
+ * 3. Ejecuta cada bloque con separador ### en IntelliJ IDEA o VS Code REST Client
+ */
+
+@gateway = http://localhost:8080
+
+// ============================================================
+// 1. ENDPOINTS DEL GATEWAY Y CASOS EXITOSOS
+// ============================================================
+
+### Listar todos los productos a traves del Gateway
+GET {{gateway}}/api/v1/products
+
+### Crear un nuevo producto (videojuego)
+POST {{gateway}}/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Elden Ring Nightreign",
+  "price": 59990,
+  "stock": 150
+}
+
+### Obtener un producto especifico
+GET {{gateway}}/api/v1/products/1
+
+### Crear un usuario nuevo
+POST {{gateway}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Carlos Mendoza",
+  "email": "carlos.mendoza@duocuc.cl",
+  "password": "SecurePass123!"
+}
+
+### Listar categorias
+GET {{gateway}}/api/v1/categories
+
+### Crear una categoria
+POST {{gateway}}/api/v1/categories
+Content-Type: application/json
+
+{
+  "name": "Aventura",
+  "description": "Juegos de aventura y exploracion"
+}
+
+### Crear un pago exitoso
+POST {{gateway}}/api/v1/payments
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "amount": 59990,
+  "paymentMethod": "CREDIT_CARD"
+}
+
+### Crear una resena exitosa
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 5,
+  "comment": "Excelente juego, graficos impresionantes y muy adictivo."
+}
+
+### Crear una notificacion interna
+POST {{gateway}}/api/v1/notifications
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "recipient": "carlos.mendoza@duocuc.cl",
+  "message": "Tu pedido #1 ha sido procesado correctamente.",
+  "type": "EMAIL"
+}
+
+### Listar todos los usuarios
+GET {{gateway}}/api/v1/users
+
+### Crear un pedido
+POST {{gateway}}/api/v1/orders
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+### Crear un item en el carrito
+POST {{gateway}}/api/v1/cart
+Content-Type: application/json
+
+{
+  "productName": "Elden Ring Nightreign",
+  "price": 59990,
+  "quantity": 1
+}
+
+### Listar resenas
+GET {{gateway}}/api/v1/reviews
+
+### Actualizar stock de inventario
+POST {{gateway}}/api/v1/inventory
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 50
+}
+
+
+// ============================================================
+// 2. CASOS DE DATOS INVALIDOS (Bean Validation — 400 Bad Request)
+// ============================================================
+
+### Pago con monto negativo (viola @DecimalMin)
+POST {{gateway}}/api/v1/payments
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "amount": -500,
+  "paymentMethod": "CREDIT_CARD"
+}
+
+### Pago con monto cero (viola @DecimalMin("0.01"))
+POST {{gateway}}/api/v1/payments
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "amount": 0,
+  "paymentMethod": "CREDIT_CARD"
+}
+
+### Pago con orderId nulo (viola @NotNull)
+POST {{gateway}}/api/v1/payments
+Content-Type: application/json
+
+{
+  "amount": 59990,
+  "paymentMethod": "CREDIT_CARD"
+}
+
+### Resena con calificacion fuera de rango (rating: 6, viola @Max(5))
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 6,
+  "comment": "Muy bueno el juego, lo recomiendo ampliamente."
+}
+
+### Resena con calificacion minima invalida (rating: 0, viola @Min(1))
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 0,
+  "comment": "El juego no me gusto nada, muy malo."
+}
+
+### Resena con comentario muy corto (menos de 10 chars, viola @Size(min=10))
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 3,
+  "comment": "Malo"
+}
+
+### Resena con comentario muy largo (mas de 500 chars, viola @Size(max=500))
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 4,
+  "comment": "Este es un comentario que supera los quinientos caracteres permitidos por el sistema de validacion del servidor. Fue escrito intencionalmente para verificar que la validacion de longitud maxima funcione correctamente en el endpoint de creacion de resenas del microservicio Review_Service_M7. El sistema debe rechazar esta solicitud con un codigo de estado HTTP 400 Bad Request y un mensaje de error estructurado que indique que el campo comment excede la longitud maxima permitida de quinientos caracteres. Esta prueba valida la integridad del Bean Validation en el DTO de entrada."
+}
+
+### Resena con rating nulo (viola @NotNull)
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "comment": "Este es un comentario valido con mas de diez caracteres para la validacion."
+}
+
+### Notificacion con email invalido (viola @Email)
+POST {{gateway}}/api/v1/notifications
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "recipient": "no-es-un-email",
+  "message": "Hola, este es un mensaje de prueba para el sistema de notificaciones.",
+  "type": "EMAIL"
+}
+
+### Notificacion con mensaje muy corto (menos de 5 chars, viola @Size(min=5))
+POST {{gateway}}/api/v1/notifications
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "recipient": "test@duocuc.cl",
+  "message": "Hi",
+  "type": "EMAIL"
+}
+
+### Producto con precio negativo (viola @Min(0))
+POST {{gateway}}/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Juego Gratis",
+  "price": -100,
+  "stock": 10
+}
+
+### Producto con stock negativo (viola @Min(0))
+POST {{gateway}}/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "Juego Sin Stock",
+  "price": 29990,
+  "stock": -5
+}
+
+### Producto sin nombre (viola @NotBlank)
+POST {{gateway}}/api/v1/products
+Content-Type: application/json
+
+{
+  "name": "",
+  "price": 29990,
+  "stock": 10
+}
+
+### Usuario con email invalido (viola @Email)
+POST {{gateway}}/api/v1/users
+Content-Type: application/json
+
+{
+  "name": "Test User",
+  "email": "email-invalido",
+  "password": "pass123"
+}
+
+### Auth: Registro con username muy corto (menos de 3 chars, viola @Size(min=3))
+POST {{gateway}}/api/v1/auth/register
+Content-Type: application/json
+
+{
+  "username": "ab",
+  "password": "password123"
+}
+
+
+// ============================================================
+// 3. RECURSOS INEXISTENTES (404 Not Found)
+// ============================================================
+
+### Buscar producto que no existe
+GET {{gateway}}/api/v1/products/9999
+
+### Buscar usuario que no existe
+GET {{gateway}}/api/v1/users/9999
+
+### Buscar categoria que no existe
+GET {{gateway}}/api/v1/categories/9999
+
+### Buscar resena que no existe
+GET {{gateway}}/api/v1/reviews/9999
+
+### Buscar notificacion que no existe
+GET {{gateway}}/api/v1/notifications/9999
+
+
+// ============================================================
+// 4. PERMISOS INSUFICIENTES (Seguridad — 401/403)
+// ============================================================
+
+### Carrito: Acceso sin cabecera de autorizacion (debe retornar 401)
+GET {{gateway}}/api/v1/cart
+
+### Carrito: Intentar editar item sin autenticacion (debe retornar 401)
+PATCH {{gateway}}/api/v1/cart/1
+Content-Type: application/json
+
+{
+  "quantity": 3
+}
+
+### Carrito: Autenticacion con credenciales incorrectas (debe retornar 401)
+GET {{gateway}}/api/v1/cart
+Authorization: Basic dXNlcjphZG1pbjEyMw==
+
+### Carrito: Intentar eliminar item con rol USER (debe retornar 403)
+DELETE {{gateway}}/api/v1/cart/1
+Authorization: Basic dXNlcm5hbWU6dXNlcjEyMw==
+
+
+// ============================================================
+// 5. COMUNICACION ENTRE SERVICIOS (Flujo de Negocio Completo)
+// ============================================================
+
+### Flujo completo: Compra de videojuego paso a Paso
+
+# Paso 1: Verificar que el producto exista y tenga stock
+GET {{gateway}}/api/v1/products/1
+
+# Paso 2: Agregar el producto al carrito
+POST {{gateway}}/api/v1/cart
+Content-Type: application/json
+
+{
+  "productName": "Elden Ring Nightreign",
+  "price": 59990,
+  "quantity": 2
+}
+
+# Paso 3: Crear la orden de compra (valida producto via RestTemplate hacia Product_Service_M2)
+POST {{gateway}}/api/v1/orders
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": 2
+}
+
+# Paso 4: Procesar el pago de la orden (valida monto y metodo de pago)
+POST {{gateway}}/api/v1/payments
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "amount": 119980,
+  "paymentMethod": "CREDIT_CARD"
+}
+
+# Paso 5: Actualizar el inventario tras la compra
+POST {{gateway}}/api/v1/inventory
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "quantity": -2
+}
+
+# Paso 6: Enviar notificacion de confirmacion al usuario
+POST {{gateway}}/api/v1/notifications
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "recipient": "carlos.mendoza@duocuc.cl",
+  "message": "Tu compra de Elden Ring Nightreign (x2) ha sido procesada exitosamente. Pago: $119.980 CLP.",
+  "type": "EMAIL"
+}
+
+# Paso 7: El usuario deja una resena del producto
+POST {{gateway}}/api/v1/reviews
+Content-Type: application/json
+
+{
+  "productId": 1,
+  "userId": 1,
+  "rating": 5,
+  "comment": "Juego espectacular, totalmente recomendado para los amantes de la accion."
+}
+
+# Paso 8: Verificar el estado final del producto (stock reducido)
+GET {{gateway}}/api/v1/products/1
+
+
+// ============================================================
+// 6. PRUEBAS DE SANTIDAD DEL SISTEMA
+// ============================================================
+
+### Verificar que el Gateway esta activo (debe retornar 200 o redirect)
+GET http://localhost:8080
+
+### Verificar que Eureka Server esta activo
+GET http://localhost:8761
+
+### Verificar Product_Service_M2 directamente (puerto 8082)
+GET http://localhost:8082/products
+
+### Verificar Payment_Service_M5 directamente (puerto 8085)
+GET http://localhost:8085/payments
