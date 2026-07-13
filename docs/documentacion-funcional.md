@@ -4,7 +4,7 @@
 >
 > **Asignatura:** DSY1103 — Desarrollo Full Stack
 >
-> **Versión:** 1.0 — Cierre Semestral 2025
+> **Versión:** 1.1 — Actualización documental 2026
 
 ---
 
@@ -51,18 +51,18 @@ El mercado de videojuegos digitales presenta una fragmentación significativa en
 
 ## 3. Requerimientos Funcionales
 
-### 3.1 Gestion de Usuarios (User_Service_M1 / Auth_Service_M10)
+### 3.1 Gestión de Usuarios (User_Service_M1 / Auth_Service_M10)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-01 | Registro de usuario | `POST /api/v1/auth/register` | Crear cuenta con username unico y password (min. 4 caracteres). |
 | RF-02 | Inicio de sesion | `POST /api/v1/auth/login` | Autenticar credenciales y retornar token de sesion. |
 | RF-03 | Crear usuario | `POST /api/v1/users` | Registrar usuario con nombre, email valido y password encriptada. |
 | RF-04 | Consultar usuario | `GET /api/v1/users/{id}` | Obtener datos de un usuario por su ID. |
 
-### 3.2 Catalogo de Videojuegos (Product_Service_M2 / Category_Service_M9)
+### 3.2 Catálogo de Videojuegos (Product_Service_M2 / Category_Service_M9)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-05 | Listar productos | `GET /api/v1/products` | Obtener todos los videojuegos disponibles. |
 | RF-06 | Consultar producto | `GET /api/v1/products/{id}` | Obtener detalle de un videojuego especifico. |
@@ -73,7 +73,7 @@ El mercado de videojuegos digitales presenta una fragmentación significativa en
 
 ### 3.3 Carrito de Compras (Cart_Service_M3)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-11 | Agregar al carrito | `POST /api/v1/cart/add` | Agregar videojuego al carrito. Valida duplicados y existencia de usuario. |
 | RF-12 | Modificar carrito | `PUT /api/v1/cart/by-id/{id}` | Actualizar cantidad, precio o cupon de un item. Solo el propietario. |
@@ -81,29 +81,29 @@ El mercado de videojuegos digitales presenta una fragmentación significativa en
 | RF-14 | Eliminar del carrito | `DELETE /api/v1/cart/by-id/{id}` | Remover item del carrito. |
 | RF-15 | Historial de cambios | `GET /api/v1/cart/by-id/{id}/history` | Ver historial de modificaciones de un item (solo ADMIN). |
 
-### 3.4 Procesamiento de Ordenes (Order_Service_M4)
+### 3.4 Procesamiento de Órdenes (Order_Service_M4)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-16 | Crear orden | `POST /api/v1/orders` | Generar orden de compra. Valida existencia del producto via Product_Service_M2. |
 | RF-17 | Consultar orden | `GET /api/v1/orders/{id}` | Obtener estado y detalle de una orden. |
 
 ### 3.5 Pasarela de Pagos (Payment_Service_M5)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-18 | Procesar pago | `POST /api/v1/payments` | Registrar pago con monto, metodo y orden asociada. Bean Validation + reglas de negocio. |
 | RF-19 | Consultar pago | `GET /api/v1/payments/{id}` | Obtener estado y detalle de un pago procesado. |
 
 ### 3.6 Inventario (Inventory_Service_M6)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-20 | Actualizar stock | `PUT /api/v1/inventory/{productId}?quantity={qty}` | Modificar stock de un producto. Cantidades positivas incrementan, negativas decrementan. Valida existencia del producto. |
 
-### 3.7 Resenas y Calificaciones (Review_Service_M7)
+### 3.7 Reseñas y Calificaciones (Review_Service_M7)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-21 | Crear resena | `POST /api/v1/reviews` | Publicar resena con calificacion (1-5) y comentario (10-500 chars). |
 | RF-22 | Actualizar resena | `PUT /api/v1/reviews/{id}` | Modificar calificacion o comentario de una resena existente. |
@@ -111,7 +111,7 @@ El mercado de videojuegos digitales presenta una fragmentación significativa en
 
 ### 3.8 Notificaciones (Notification_Service_M8)
 
-| ID | Requerimiento | Endpoint | Descripcion |
+| ID | Requerimiento | Endpoint | Descripción |
 |----|--------------|----------|-------------|
 | RF-24 | Enviar notificacion | `POST /api/v1/notifications` | Enviar notificacion por EMAIL, SMS o PUSH con formato de correo valido. |
 | RF-25 | Consultar notificaciones | `GET /api/v1/notifications/user/{userId}` | Listar todas las notificaciones de un usuario. |
@@ -164,7 +164,7 @@ Cliente                Gateway(:8080)          Product_Svc(:8082)       Cart_Svc
 8. Payment_Service_M5 valida reglas de negocio (monto > 0, limite $1.000.000) y registra el pago como SUCCESS.
 9. Se decrementa el stock del producto en Inventory_Service_M6.
 
-### 4.2 Flujo de Publicacion de Resena
+### 4.2 Flujo de Publicación de Reseña
 
 ```
 Cliente                Gateway(:8080)          Review_Svc(:8087)        Notification_Svc(:8088)
@@ -206,7 +206,7 @@ Cliente                Gateway(:8080)          Review_Svc(:8087)        Notifica
 
 **Metodos de pago aceptados:** `CREDIT_CARD`, `DEBIT_CARD`, `BANK_TRANSFER`, `CASH`
 
-### 5.2 Resenas y Calificaciones (Review_Service_M7)
+### 5.2 Reseñas y Calificaciones (Review_Service_M7)
 
 | Regla | Restriccion Bean Validation | Excepcion | HTTP |
 |-------|---------------------------|-----------|------|
@@ -488,7 +488,7 @@ Content-Type: application/json
 ```
 **Respuesta esperada:** HTTP 400 — "rating: La calificacion maxima es 5 estrellas; comment: El comentario debe tener entre 10 y 500 caracteres".
 
-### 7.8 Enviar Notificacion
+### 7.8 Enviar Notificación
 
 **Notificacion por email:**
 ```json
@@ -519,4 +519,4 @@ Content-Type: application/json
 
 ---
 
-> **Duoc UC — Evaluacion Final Transversal 2025**
+> **Duoc UC — Evaluación Final Transversal (actualizado 2026)**

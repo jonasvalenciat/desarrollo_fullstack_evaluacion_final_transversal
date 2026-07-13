@@ -4,27 +4,27 @@
 >
 > **Asignatura:** DSY1103 — Desarrollo Full Stack
 >
-> **Version:** 1.0 — Cierre Semestral 2025
+> **Versión:** 1.1 — Actualización documental 2026 (hitos 2025)
 >
-> **Seccion de Rubrica:** 4.2.6 — Levantamiento de Requerimientos Actualizado
+> **Sección de Rúbrica:** 4.2.6 — Levantamiento de Requerimientos Actualizado
 
 ---
 
 ## 1. Contexto del Levantamiento
 
-El presente documento registra la **evolucion real** de los requerimientos funcionales del proyecto GameVerse desde su planteamiento inicial hasta su estado final de cierre semestral. Incluye los requerimientos que se mantuvieron sin cambios, los que fueron modificados tras retroalimentacion intermedia, los que fueron eliminados por decision de alcance, y los que fueron agregados para cumplir con los objetivos arquitectonicos de produccion.
+Este documento registra la **evolución real** de los requerimientos funcionales del proyecto GameVerse, desde su planteamiento inicial hasta su cierre semestral. Incluye los requerimientos que se mantuvieron, los que se ajustaron tras la retroalimentación intermedia, los que se descartaron por alcance y los que se incorporaron para cumplir los objetivos arquitectónicos de despliegue en la nube.
 
-> **Fecha de creacion:** Junio 2025
+> **Fecha de creación:** Junio 2025 (hito histórico)
 >
-> **Fecha de actualizacion:** Julio 2025 (cierre semestral)
+> **Fecha de actualización:** Julio 2025 (cierre semestral, hito histórico)
 >
-> **Fuente de retroalimentacion:** Feedback intermedio del profesor + autoevaluacion del equipo
+> **Fuente de retroalimentación:** Feedback intermedio del profesor + autoevaluación del equipo
 
 ---
 
-## 2. Tabla Principal de Evolucion de Requerimientos
+## 2. Tabla Principal de Evolución de Requerimientos
 
-| ID | Requerimiento Original | Cambio Realizado | Justificacion | Estado Final | Evidencia en Repositorio |
+| ID | Requerimiento Original | Cambio Realizado | Justificación | Estado Final | Evidencia en Repositorio |
 |----|----------------------|------------------|---------------|-------------|--------------------------|
 | RF-01 | Gestion de Videojuegos / Catalogo de productos | Se mantuvo y se implemento con persistencia completa (CRUD) y validacion de datos | El requerimiento era solido desde el inicio. Se mantuvo sin cambios significativos y se implemento con Spring Data JPA + Bean Validation. Incluye creacion, lectura, actualizacion y eliminacion de productos. | **Mantenido** | `Product_Service_M2/src/main/java/.../controller/ProductController.java`, `Product.java`, `ProductServiceTest.java` |
 | RF-02 | Autenticacion de Usuarios | Se mantuvo incorporando roles basicos (ADMIN, USER,_AGENT) y autenticacion por contrasena hasheada con BCrypt | El alcance original de autenticacion con JWT se ajusto a un enfoque simplificado pero funcional: BCrypt para hashing, roles basicos, y login con token mock. Se priorizo la funcionalidad sobre la complejidad del token. | **Mantenido** | `User_Service_M1/src/main/java/.../controller/UserController.java`, `Auth_Service_M10/src/main/java/.../controller/AuthController.java`, `UserServiceTest.java`, `AuthServiceTest.java` |
@@ -90,16 +90,16 @@ El presente documento registra la **evolucion real** de los requerimientos funci
 
 ---
 
-## 5. Decisiones Clave del Equipo
+## 5. Decisiones Clave del Equipo (registro histórico 2025)
 
-| Decision | Fecha | Justificacion |
+| Decisión | Fecha | Justificación |
 |----------|-------|---------------|
 | Eliminar integracion externa de notificaciones | Junio 2025 | Complejidad de APIs de terceros + restricciones de tiempo del semestre |
-| Agregar Eureka + Gateway | Junio 2025 | Feedback del profesor: necesidad de arquitectura de produccion real |
+| Agregar Eureka + Gateway | Junio 2025 | Feedback del profesor: necesidad de arquitectura de producción en la nube |
 | Simplificar JWT a BCrypt + token mock | Junio 2025 | Priorizar funcionalidad sobre complejidad de implementacion |
 | Agregar `PaymentBusinessException` | Junio 2025 | Feedback intermedio: manejo de errores mas robusto en pagos |
 | Crear CartHistory para auditoria | Junio 2025 | Necesidad de trazabilidad en cambios del carrito |
 
 ---
 
-> **Duoc UC — Evaluacion Final Transversal 2025**
+> **Duoc UC — Evaluación Final Transversal (hitos 2025, actualizado 2026)**
