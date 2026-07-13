@@ -30,7 +30,7 @@ de los 10 microservicios originales bajo:
 - **Dockerfiles multi-stage** con Alpine Linux.
 - **Configuración YAML** con perfiles de base de datos.
 
-En la etapa de cierre semestral (evaluación 3), el sistema
+En la etapa de cierre semestral (evaluacion_final_transversal), el sistema
 evolucionó hacia un **backend real y unificado** con:
 
 - **API Gateway centralizado** (`Gateway_Service_M11`) como
@@ -186,7 +186,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 ## 5. Evolución del Proyecto — Resumen Visual
 
 ```
-EVALUACIÓN 1 (Aislado)          EVALUACIÓN 2 (Estandarizado)       EVALUACIÓN 3 (Unificado)
+EVALUACIÓN 2 (Aislado)          EVALUACIÓN 3 (Estandarizado)       evaluacion_final_transversal(Unificado)
 ┌──────────────────┐           ┌──────────────────────┐            ┌──────────────────────────┐
 │ Endpoints sueltos │    →     │ Base técnica común    │     →     │ Backend real y unificado  │
 │ Sin DTOs          │           │ Java 17 + SB 3.4.4   │            │ API Gateway (M11)         │
