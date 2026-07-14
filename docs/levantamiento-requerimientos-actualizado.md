@@ -14,9 +14,9 @@
 
 El presente documento registra la **evolucion real** de los requerimientos funcionales del proyecto GameVerse desde su planteamiento inicial hasta su estado final de cierre semestral. Incluye los requerimientos que se mantuvieron sin cambios, los que fueron modificados tras retroalimentacion intermedia, los que fueron eliminados por decision de alcance, y los que fueron agregados para cumplir con los objetivos arquitectonicos de produccion.
 
-> **Fecha de creacion:** Junio 2025
+> **Fecha de creacion:** Junio 2026
 >
-> **Fecha de actualizacion:** Julio 2025 (cierre semestral)
+> **Fecha de actualizacion:** Julio 2026 (cierre semestral)
 >
 > **Fuente de retroalimentacion:** Feedback intermedio del profesor + autoevaluacion del equipo
 
@@ -102,4 +102,4 @@ El presente documento registra la **evolucion real** de los requerimientos funci
 
 ---
 
-> **Duoc UC — Evaluacion Final Transversal 2025**
+> **Duoc UC — Evaluacion Final Transversal 2026**

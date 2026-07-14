@@ -4,14 +4,14 @@
 
 ## 1. Informacion General
 
-| Campo | Detalle |
-|-------|---------|
-| **Nombre del Proyecto** | Ecosystem VJ — E-Commerce de Videojuegos Online |
+| Campo | Detalle                                                           |
+|-------|-------------------------------------------------------------------|
+| **Nombre del Proyecto** | GameVerse — E-Commerce de Videojuegos Online                      |
 | **Asignatura** | DSY1103 — Desarrollo de Software y Arquitectura de Microservicios |
-| **Profesor** | Prof. Martínez |
-| **Institucion** | Duoc UC — Examen Final Transversal (EFT) Semestral 2025 |
-| **Integrante 1** | Jonás Valencia — Ingeniero DevOps & QA |
-| **Integrante 2** | Martín Soto — Arquitecto de Software Full-Stack |
+| **Profesor** | Prof. Martínez                                                    |
+| **Institucion** | Duoc UC — Examen Final Transversal (EFT) Semestral 2025           |
+| **Integrante 1** | Jonás Valencia — Ingeniero DevOps & QA                            |
+| **Integrante 2** | Martín Soto — Arquitecto de Software Full-Stack                   |
 
 ---
 
@@ -458,6 +458,6 @@ El trabajo colaborativo entre DevOps y Arquitecto Full-Stack permitio entregar u
 
 ---
 
-> **Duoc UC — Examen Final Transversal 2025**
+> **Duoc UC — Examen Final Transversal 2026**
 >
 > **Integrantes:** Jonás Valencia | Martín Soto

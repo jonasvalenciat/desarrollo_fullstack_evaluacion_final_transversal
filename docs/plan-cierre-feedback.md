@@ -4,7 +4,7 @@
 >
 > **Asignatura:** DSY1103 — Desarrollo Full Stack
 >
-> **Fecha de cierre:** 2025-07-13
+> **Fecha de cierre:** 2026-07-13
 
 ---
 

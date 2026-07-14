@@ -4,17 +4,17 @@
 >
 > Desarrollo de Software y Arquitectura de Microservicios
 >
-> Profesor Martínez — Duoc UC — Semestral 2025
+> Profesor Martínez — Duoc UC — Semestral 2026
 
 ---
 
 ## 1. Informacion General
 
-| Campo | Detalle |
-|-------|---------|
-| **Nombre del Estudiante** | Jonás Valencia |
-| **Rol dentro del Equipo** | Ingeniero DevOps & QA |
-| **Proyecto** | Ecosystem VJ — E-Commerce de Videojuegos Online |
+| Campo | Detalle                                         |
+|-------|-------------------------------------------------|
+| **Nombre del Estudiante** | Jonás Valencia                                  |
+| **Rol dentro del Equipo** | Ingeniero DevOps & QA                           |
+| **Proyecto** | GameVerse — E-Commerce de Videojuegos Online    |
 | **Compañero de Equipo** | Martín Soto — Arquitecto de Software Full-Stack |
 
 ---
@@ -435,6 +435,6 @@ server:
 
 ---
 
-> **Duoc UC — Examen Final Transversal 2025**
+> **Duoc UC — Examen Final Transversal 2026**
 >
 > **Estudiante:** Jonás Valencia — Ingeniero DevOps & QA
