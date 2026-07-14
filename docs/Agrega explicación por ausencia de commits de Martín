@@ -1,0 +1,19 @@
+4.4 Documento de defensa técnica individual
+
+## 1. Información General
+* **Nombre del Estudiante:** Martín Soto
+* **Rol dentro del Equipo:** Arquitecto de Software Full-Stack
+
+## 2. Justificación de Commits e Historial de Git
+* El estudiante no registra commits individuales porque su computador personal sufrió una falla de hardware y quedó completamente inoperativo.
+* Su participación activa se justifica plenamente ya que estuvo presente vía llamada telefónica en tiempo real mientras trabajábamos en el proyecto, colaborando juntos.
+* Esta situación quedó formalmente respaldada en el repositorio a través del commit: `"Agrega explicación por ausencia de commits de Martín"`.
+
+## 3. Aportes Técnicos y Regla de Negocio
+* **Módulos:** Colaboró en el diseño lógico del Catálogo (M2), Pagos (M5) y Reseñas (M7).
+* **Regla de Negocio:** Dominio en la validación del Review Service (M7), asegurando por backend que las calificaciones solo sean de 1 a 5 estrellas.
+* **Resolución de Dificultad:** Ante la falta de computador, adaptó su flujo de trabajo a asistencia telefónica sincrónica para dictar y revisar que el código respetara la arquitectura por capas (CSR).
+
+## 4. Checklist de Evidencia
+* [x] Diseño lógico de validaciones y excepciones completado.
+* [x] Registro de contingencia integrado en el historial de Git mediante commit aclaratorio.
