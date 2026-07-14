@@ -15,7 +15,7 @@
 | **Proyecto** | GameVerse — Tienda de Videojuegos Online |
 | **Asignatura** | DSY1103 — Desarrollo Full Stack |
 | **Institución** | Duoc UC |
-| **Semestre** | 2025-2 |
+| **Semestre** | 2026-1 |
 
 | # | Integrante | Rol |
 |---|-----------|-----|
@@ -472,4 +472,4 @@ Render respeta las dependencias definidas en `dependsOn`:
 
 ---
 
-> **Duoc UC — Evaluación Final Transversal 2025**
+> **Duoc UC — Evaluación Final Transversal 2026**
